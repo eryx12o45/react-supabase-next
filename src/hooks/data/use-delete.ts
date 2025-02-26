@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import { Count, Filter, PostgrestError, Returning } from '../../types.ts'
 import { useClient } from '../use-client.ts'
 import { initialState } from './state.ts'
@@ -38,15 +39,16 @@ export function useDelete<Data = any>(
 
     /* eslint-disable react-hooks/exhaustive-deps */
     const execute = useCallback(
-        async (filter?: Filter<any, any, any, any, any>, options?: UseDeleteOptions) => {
+        async (
+            filter?: Filter<any, any, any, any, any>,
+            options?: UseDeleteOptions,
+        ) => {
             const refine = filter ?? config.filter
             if (refine === undefined)
                 throw Error('delete() should always be combined with `filter`')
 
             setState({ ...initialState, fetching: true })
-            const source = client
-                .from(table)
-                .delete(options ?? config.options)
+            const source = client.from(table).delete(options ?? config.options)
             const { count, data, error } = await refine(source)
 
             const res = { count, data, error }

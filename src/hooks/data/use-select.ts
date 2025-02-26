@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import { Count, Filter, PostgrestError } from '../../types.ts'
 import { useClient } from '../use-client.ts'
 import { initialState } from './state.ts'
@@ -19,10 +20,12 @@ export type UseSelectResponse<Data = any> = [
     > | null>,
 ]
 
-export type UseSelectOptions = {
-    count?: Count
-    head?: boolean | undefined
-} | undefined
+export type UseSelectOptions =
+    | {
+          count?: Count
+          head?: boolean | undefined
+      }
+    | undefined
 
 export type UseSelectConfig = {
     columns?: string
@@ -50,9 +53,7 @@ export function useSelect<Data = any>(
             stale: true,
             fetching: true,
         }))
-        const source = client
-            .from(table)
-            .select(config.columns, config.options)
+        const source = client.from(table).select(config.columns, config.options)
         const { count, data, error } = await (config.filter
             ? config.filter(source)
             : source)

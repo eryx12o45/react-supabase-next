@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { SupabaseRealtimePayload } from '@supabase/supabase-js'
 
 import { UseSelectConfig, UseSelectState, useSelect } from '../data/index.js'
@@ -48,8 +49,10 @@ export function useRealtime<Data = any>(
         )
 
     const [result, reexecute] = useSelect<Data>(table, config?.select)
-    // @ts-ignore
-    const [state, dispatch] = useReducer<React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
+    const [state, dispatch] = useReducer<
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
     >(reducer(compareFn), result)
 
     useSubscription((payload) => dispatch({ type: 'SUBSCRIPTION', payload }), {
@@ -60,7 +63,8 @@ export function useRealtime<Data = any>(
         dispatch({ type: 'FETCH', payload: result })
     }, [result])
 
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     return [state, reexecute]
 }
 

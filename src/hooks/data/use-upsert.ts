@@ -20,11 +20,13 @@ export type UseUpsertResponse<Data = any> = [
     ) => Promise<Pick<UseUpsertState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
-export type UseUpsertOptions = {
-    count?: Count
-    onConflict?: string
-    returning?: Returning
-} | undefined
+export type UseUpsertOptions =
+    | {
+          count?: Count
+          onConflict?: string
+          returning?: Returning
+      }
+    | undefined
 
 export type UseUpsertConfig = {
     filter?: Filter<any, any, any, any, any>

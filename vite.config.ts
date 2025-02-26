@@ -16,8 +16,8 @@ export default defineConfig({
                 ...Object.keys(pkg.devDependencies ?? {}),
             ],
             output: {
-                esModule: true
-            }
+                esModule: true,
+            },
         },
     },
     plugins: [

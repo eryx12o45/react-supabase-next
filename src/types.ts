@@ -3,8 +3,20 @@ import { GenericSchema } from '@supabase/supabase-js/dist/module/lib/types.js'
 
 export type Count = 'exact' | 'planned' | 'estimated'
 
-export type Filter<Schema extends GenericSchema, Row extends Record<any, any>, Result, RelationName, Relationships> = (
-    query: PostgrestFilterBuilder<Schema, Row, Result, RelationName, Relationships>,
+export type Filter<
+    Schema extends GenericSchema,
+    Row extends Record<any, any>,
+    Result,
+    RelationName,
+    Relationships,
+> = (
+    query: PostgrestFilterBuilder<
+        Schema,
+        Row,
+        Result,
+        RelationName,
+        Relationships
+    >,
 ) => PostgrestFilterBuilder<Schema, Row, Result, RelationName, Relationships>
 
 export type PostgrestError = {

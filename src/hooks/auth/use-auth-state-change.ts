@@ -10,7 +10,9 @@ export function useAuthStateChange(
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        const { data: { subscription } } = client.auth.onAuthStateChange(callback)
+        const {
+            data: { subscription },
+        } = client.auth.onAuthStateChange(callback)
         return () => {
             subscription?.unsubscribe()
         }

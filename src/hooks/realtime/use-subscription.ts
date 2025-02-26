@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { RealtimeMessage } from '@supabase/realtime-js'
+
 import { useClient } from '../use-client.js'
 
 export type UseSubscriptionConfig = {
@@ -17,7 +18,7 @@ export function useSubscription(
     useEffect(() => {
         const subscription = client
             .channel(config.table ?? '*')
-            .on("system", config.event ?? '*', callback)
+            .on('system', config.event ?? '*', callback)
             .subscribe()
         return () => {
             subscription.unsubscribe()

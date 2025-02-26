@@ -1,4 +1,10 @@
-import { Provider, Session, User, AuthError, SignInWithPasswordCredentials } from '@supabase/auth-js'
+import {
+    AuthError,
+    Provider,
+    Session,
+    SignInWithPasswordCredentials,
+    User,
+} from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
 import { useClient } from '../use-client.js'
@@ -29,23 +35,21 @@ export type UseSignInConfig = {
     options?: UseSignInOptions
 }
 
-export function useSignInWithPassword(config: UseSignInConfig = {}): UseSignInResponse {
+export function useSignInWithPassword(): UseSignInResponse {
     const client = useClient()
     const [state, setState] = useState<UseSignInState>(initialState)
 
     const execute = useCallback(
         async (credentials: SignInWithPasswordCredentials) => {
             setState({ ...initialState, fetching: true })
-            const { data, error } = await client.auth.signInWithPassword(
-                {
-                    ...credentials
-                }
-            )
+            const { data, error } = await client.auth.signInWithPassword({
+                ...credentials,
+            })
             const res = { data, error }
             setState({ ...res, fetching: false })
             return res
         },
-        [client, config],
+        [client],
     )
 
     return [state, execute]
