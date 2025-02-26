@@ -4,27 +4,32 @@ import { useRealtime } from '../../../src/hooks/realtime/use-realtime.ts'
 import { Wrapper as wrapper } from '../../utils.tsx'
 
 describe('useRealtime', () => {
-    it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useRealtime('todos'))
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
-    })
-
-    it('should throw when trying to listen all database changes', () => {
-        const { result } = renderHook(() => useRealtime('*'), { wrapper })
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
-    })
-
-    it('should throw when trying to listen all database changes via options', () => {
-        const { result } = renderHook(
-            () =>
-                useRealtime('*', {
-                    select: {
-                        columns: 'id, username, completed',
-                        filter: (query) => query.eq('completed', false),
-                    },
-                }),
-            { wrapper },
+    test('should throw when not inside Provider', () => {
+        expect(() => renderHook(() => useRealtime('todos'))).toThrow(
+            'No client has been specified using Provider.',
         )
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    })
+
+    test('should throw when trying to listen all database changes', () => {
+        expect(() => renderHook(() => useRealtime('*'), { wrapper })).toThrow(
+            'Must specify table or row. Cannot listen for all database changes.',
+        )
+    })
+
+    test('should throw when trying to listen all database changes via options', () => {
+        expect(() =>
+            renderHook(
+                () =>
+                    useRealtime('*', {
+                        select: {
+                            columns: 'id, username, completed',
+                            filter: (query) => query.eq('completed', false),
+                        },
+                    }),
+                { wrapper },
+            ),
+        ).toThrow(
+            'Must specify table or row. Cannot listen for all database changes.',
+        )
     })
 })

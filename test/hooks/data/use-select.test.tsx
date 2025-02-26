@@ -5,12 +5,13 @@ import { initialState } from '../../../src/hooks/data/state.ts'
 import { Wrapper as wrapper } from '../../utils.tsx'
 
 describe('useSelect', () => {
-    it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSelect('todos'))
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    test('should throw when not inside Provider', () => {
+        expect(() => renderHook(() => useSelect('todos'))).toThrow(
+            'No client has been specified using Provider.',
+        )
     })
 
-    it('should have correct initial state', async () => {
+    test('should have correct initial state', async () => {
         const { result } = renderHook(
             () => useSelect('todos', { pause: true }),
             { wrapper },

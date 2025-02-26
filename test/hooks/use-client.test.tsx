@@ -4,23 +4,27 @@ import { useClient } from '../../src/hooks/use-client.ts'
 import { Wrapper as wrapper } from '../utils.tsx'
 
 describe('useClient', () => {
-    it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useClient())
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    test('should throw when not inside Provider', () => {
+        expect(() => renderHook(() => useClient())).toThrow(
+            'No client has been specified using Provider.',
+        )
     })
 
-    it('should return client', () => {
+    test('should return client', () => {
         const { result } = renderHook(() => useClient(), { wrapper })
         expect(Object.keys(result.current)).toEqual([
             'supabaseUrl',
             'supabaseKey',
-            'restUrl',
             'realtimeUrl',
             'authUrl',
             'storageUrl',
-            'schema',
+            'functionsUrl',
+            'storageKey',
+            'headers',
             'auth',
+            'fetch',
             'realtime',
+            'rest',
         ])
     })
 })

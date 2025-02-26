@@ -3,8 +3,9 @@ import { renderHook } from '@testing-library/react'
 import { useSubscription } from '../../../src/hooks/realtime/use-subscription.ts'
 
 describe('useSubscription', () => {
-    it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSubscription(jest.fn()))
-        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    test('should throw when not inside Provider', () => {
+        expect(() => renderHook(() => useSubscription(jest.fn()))).toThrow(
+            'No client has been specified using Provider.',
+        )
     })
 })

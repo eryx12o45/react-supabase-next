@@ -44,7 +44,7 @@ export function useRealtime<Data = any>(
         (<CompareFnDefaultData<Data>>b).id,
 ): UseRealtimeResponse<Data> {
     if (table === '*')
-        throw Error(
+        throw new Error(
             'Must specify table or row. Cannot listen for all database changes.',
         )
 

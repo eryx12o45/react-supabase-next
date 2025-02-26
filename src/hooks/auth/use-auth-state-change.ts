@@ -4,7 +4,10 @@ import { useEffect } from 'react'
 import { useClient } from '../use-client.ts'
 
 export function useAuthStateChange(
-    callback: (event: AuthChangeEvent, session: Session | null) => void,
+    callback: (
+        event: AuthChangeEvent,
+        session: Session | null,
+    ) => void | Promise<void>,
 ) {
     const client = useClient()
 

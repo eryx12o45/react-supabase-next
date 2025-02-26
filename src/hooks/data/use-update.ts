@@ -47,7 +47,9 @@ export function useUpdate<Data = any>(
         ) => {
             const refine = filter ?? config.filter
             if (refine === undefined)
-                throw Error('update() should always be combined with `filter`')
+                throw new Error(
+                    'update() should always be combined with `filter`',
+                )
 
             setState({ ...initialState, fetching: true })
             const source = client
