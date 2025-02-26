@@ -1,6 +1,6 @@
 export default {
-    repository: 'https://github.com/tmm/react-supabase',
-    docsRepository: 'https://github.com/tmm/react-supabase',
+    repository: 'https://github.com/eryx12o45/react-supabase',
+    docsRepository: 'https://github.com/eryx12o45/react-supabase',
     branch: 'main',
     path: '/docs/',
     titleSuffix: ' – react-supabase',
@@ -12,7 +12,7 @@ export default {
     defaultMenuCollapsed: true,
     darkMode: true,
     footer: true,
-    footerText: 'MIT 2020 © Tom Meagher.',
+    footerText: 'MIT 2020 © Tom Meagher. / 2025 © Sebastian Pfahl',
     footerEditOnGitHubLink: true,
     logo: <span>react-supabase</span>,
     head: (

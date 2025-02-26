@@ -16,3 +16,6 @@ title: Introduction
 ## Community
 
 Feel free to join the [discussions on GitHub](https://github.com/tmm/react-supabase/discussions)!
+
+# Thanks
+to https://github.com/tmm/react-supabase for building this library in the first place
