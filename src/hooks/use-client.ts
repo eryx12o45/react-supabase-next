@@ -1,7 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js'
 import { useContext } from 'react'
 
-import { Context } from '../context'
+import { Context } from '../context.ts'
 
 export function useClient(): SupabaseClient {
     const client = useContext(Context)

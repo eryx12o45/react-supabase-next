@@ -1,10 +1,10 @@
-import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
+import { AuthError } from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
-import { useClient } from '../use-client'
+import { useClient } from '../use-client.js'
 
 export type UseResetPasswordState = {
-    error?: ApiError | null
+    error?: AuthError | null
     fetching: boolean
 }
 
@@ -38,7 +38,7 @@ export function useResetPassword(
     const execute = useCallback(
         async (email: string, options?: UseResetPasswordOptions) => {
             setState({ ...initialState, fetching: true })
-            const { error } = await client.auth.api.resetPasswordForEmail(
+            const { error } = await client.auth.resetPasswordForEmail(
                 email,
                 options ?? config.options,
             )

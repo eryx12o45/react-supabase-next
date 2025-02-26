@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Count, Filter, PostgrestError, Returning } from '../../types'
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError, Returning } from '../../types.ts'
+import { useClient } from '../use-client.js'
+import { initialState } from './state.js'
 
 export type UseUpdateState<Data = any> = {
     count?: number | null
@@ -15,24 +15,24 @@ export type UseUpdateResponse<Data = any> = [
     UseUpdateState<Data>,
     (
         values: Partial<Data>,
-        filter?: Filter<Data>,
+        filter?: Filter<any, any, any, any, any>,
         options?: UseUpdateOptions,
     ) => Promise<Pick<UseUpdateState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
 export type UseUpdateOptions = {
-    count?: null | Count
+    count?: Count
     returning?: Returning
 }
 
-export type UseUpdateConfig<Data = any> = {
-    filter?: Filter<Data>
+export type UseUpdateConfig = {
+    filter?: Filter<any, any, any, any, any>
     options?: UseUpdateOptions
 }
 
 export function useUpdate<Data = any>(
     table: string,
-    config: UseUpdateConfig<Data> = { options: {} },
+    config: UseUpdateConfig = { options: {} },
 ): UseUpdateResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
@@ -42,7 +42,7 @@ export function useUpdate<Data = any>(
     const execute = useCallback(
         async (
             values: Partial<Data>,
-            filter?: Filter<Data>,
+            filter?: Filter<any, any, any, any, any>,
             options?: UseUpdateOptions,
         ) => {
             const refine = filter ?? config.filter
@@ -51,7 +51,7 @@ export function useUpdate<Data = any>(
 
             setState({ ...initialState, fetching: true })
             const source = client
-                .from<Data>(table)
+                .from(table)
                 .update(values, options ?? config.options)
             const { count, data, error } = await refine(source)
 

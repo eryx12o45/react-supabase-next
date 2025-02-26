@@ -1,7 +1,7 @@
-import { AuthChangeEvent, Session } from '@supabase/gotrue-js'
+import { AuthChangeEvent, Session } from '@supabase/auth-js'
 import { useEffect } from 'react'
 
-import { useClient } from '../use-client'
+import { useClient } from '../use-client.js'
 
 export function useAuthStateChange(
     callback: (event: AuthChangeEvent, session: Session | null) => void,
@@ -10,9 +10,9 @@ export function useAuthStateChange(
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        const { data: authListener } = client.auth.onAuthStateChange(callback)
+        const { data: { subscription } } = client.auth.onAuthStateChange(callback)
         return () => {
-            authListener?.unsubscribe()
+            subscription?.unsubscribe()
         }
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */

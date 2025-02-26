@@ -1,10 +1,10 @@
-import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
+import { AuthError } from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
-import { useClient } from '../use-client'
+import { useClient } from '../use-client.js'
 
 export type UseSignOutState = {
-    error?: ApiError | null
+    error?: AuthError | null
     fetching: boolean
 }
 

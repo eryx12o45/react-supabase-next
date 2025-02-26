@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-import { Count, Filter, PostgrestError } from '../../types'
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError } from '../../types.ts'
+import { useClient } from '../use-client.ts'
+import { initialState } from './state.ts'
 
 export type UseSelectState<Data = any> = {
     count?: number | null
@@ -21,20 +20,20 @@ export type UseSelectResponse<Data = any> = [
 ]
 
 export type UseSelectOptions = {
-    count?: null | Count
-    head?: boolean
-}
+    count?: Count
+    head?: boolean | undefined
+} | undefined
 
-export type UseSelectConfig<Data = any> = {
+export type UseSelectConfig = {
     columns?: string
-    filter?: Filter<Data> | false | null
+    filter?: Filter<any, any, any, any, any> | false | null
     options?: UseSelectOptions
     pause?: boolean
 }
 
 export function useSelect<Data = any>(
     table: string,
-    config: UseSelectConfig<Data> = { columns: '*', options: {} },
+    config: UseSelectConfig = { columns: '*', options: {} },
 ): UseSelectResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
@@ -52,7 +51,7 @@ export function useSelect<Data = any>(
             fetching: true,
         }))
         const source = client
-            .from<Data>(table)
+            .from(table)
             .select(config.columns, config.options)
         const { count, data, error } = await (config.filter
             ? config.filter(source)

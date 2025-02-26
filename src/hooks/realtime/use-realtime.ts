@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
+// @ts-ignore
 import { SupabaseRealtimePayload } from '@supabase/supabase-js'
 
-import { UseSelectConfig, UseSelectState, useSelect } from '../data'
-import { useSubscription } from './use-subscription'
+import { UseSelectConfig, UseSelectState, useSelect } from '../data/index.js'
+import { useSubscription } from './use-subscription.js'
 
 export type UseRealtimeState<Data = any> = Omit<
     UseSelectState<Data>,
@@ -23,8 +24,8 @@ export type UseRealtimeAction<Data = any> =
     | { type: 'FETCH'; payload: UseSelectState<Data> }
     | { type: 'SUBSCRIPTION'; payload: SupabaseRealtimePayload<Data> }
 
-export type UseRealtimeConfig<Data = any> = {
-    select?: Omit<UseSelectConfig<Data>, 'pause'>
+export type UseRealtimeConfig = {
+    select?: Omit<UseSelectConfig, 'pause'>
 }
 
 export type UseRealtimeCompareFn<Data = any> = (
@@ -36,7 +37,7 @@ type CompareFnDefaultData<Data> = Data & { id: any }
 
 export function useRealtime<Data = any>(
     table: string,
-    config?: UseRealtimeConfig<Data>,
+    config?: UseRealtimeConfig,
     compareFn: UseRealtimeCompareFn<Data> = (a, b) =>
         (<CompareFnDefaultData<Data>>a).id ===
         (<CompareFnDefaultData<Data>>b).id,
@@ -47,8 +48,8 @@ export function useRealtime<Data = any>(
         )
 
     const [result, reexecute] = useSelect<Data>(table, config?.select)
-    const [state, dispatch] = useReducer<
-        React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
+    // @ts-ignore
+    const [state, dispatch] = useReducer<React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
     >(reducer(compareFn), result)
 
     useSubscription((payload) => dispatch({ type: 'SUBSCRIPTION', payload }), {
@@ -59,6 +60,7 @@ export function useRealtime<Data = any>(
         dispatch({ type: 'FETCH', payload: result })
     }, [result])
 
+    // @ts-ignore
     return [state, reexecute]
 }
 
@@ -67,13 +69,13 @@ const reducer =
     (
         state: UseRealtimeState<Data>,
         action: UseRealtimeAction<Data>,
-    ): UseRealtimeState<Data> => {
+    ): UseRealtimeState => {
         const old = state.data
         switch (action.type) {
             case 'FETCH':
                 return { ...state, old, ...action.payload }
             case 'SUBSCRIPTION':
-                switch (action.payload.eventType) {
+                switch (action.payload.event) {
                     case 'DELETE':
                         return {
                             ...state,
@@ -106,6 +108,8 @@ const reducer =
                             old,
                         }
                     }
+                    default:
+                        return state
                 }
         }
     }

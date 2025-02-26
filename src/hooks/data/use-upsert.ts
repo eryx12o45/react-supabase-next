@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Count, Filter, PostgrestError, Returning } from '../../types'
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError, Returning } from '../../types.ts'
+import { useClient } from '../use-client.js'
+import { initialState } from './state.js'
 
 export type UseUpsertState<Data = any> = {
     count?: number | null
@@ -16,24 +16,24 @@ export type UseUpsertResponse<Data = any> = [
     (
         values: Partial<Data> | Partial<Data>[],
         options?: UseUpsertOptions,
-        filter?: Filter<Data>,
+        filter?: Filter<any, any, any, any, any>,
     ) => Promise<Pick<UseUpsertState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
 export type UseUpsertOptions = {
-    count?: null | Count
+    count?: Count
     onConflict?: string
     returning?: Returning
-}
+} | undefined
 
-export type UseUpsertConfig<Data = any> = {
-    filter?: Filter<Data>
+export type UseUpsertConfig = {
+    filter?: Filter<any, any, any, any, any>
     options?: UseUpsertOptions
 }
 
 export function useUpsert<Data = any>(
     table: string,
-    config: UseUpsertConfig<Data> = { options: {} },
+    config: UseUpsertConfig = { options: {} },
 ): UseUpsertResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
@@ -44,12 +44,12 @@ export function useUpsert<Data = any>(
         async (
             values: Partial<Data> | Partial<Data>[],
             options?: UseUpsertOptions,
-            filter?: Filter<Data>,
+            filter?: Filter<any, any, any, any, any>,
         ) => {
             const refine = filter ?? config.filter
             setState({ ...initialState, fetching: true })
             const source = client
-                .from<Data>(table)
+                .from(table)
                 .upsert(values, options ?? config.options)
 
             const { count, data, error } = await (refine

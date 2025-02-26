@@ -1,10 +1,11 @@
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js'
+import { GenericSchema } from '@supabase/supabase-js/dist/module/lib/types.js'
 
 export type Count = 'exact' | 'planned' | 'estimated'
 
-export type Filter<Data> = (
-    query: PostgrestFilterBuilder<Data>,
-) => PostgrestFilterBuilder<Data>
+export type Filter<Schema extends GenericSchema, Row extends Record<any, any>, Result, RelationName, Relationships> = (
+    query: PostgrestFilterBuilder<Schema, Row, Result, RelationName, Relationships>,
+) => PostgrestFilterBuilder<Schema, Row, Result, RelationName, Relationships>
 
 export type PostgrestError = {
     message: string

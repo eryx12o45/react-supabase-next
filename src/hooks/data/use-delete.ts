@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-import { Count, Filter, PostgrestError, Returning } from '../../types'
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError, Returning } from '../../types.ts'
+import { useClient } from '../use-client.ts'
+import { initialState } from './state.ts'
 
 export type UseDeleteState<Data = any> = {
     count?: number | null
@@ -14,24 +13,24 @@ export type UseDeleteState<Data = any> = {
 export type UseDeleteResponse<Data = any> = [
     UseDeleteState<Data>,
     (
-        filter?: Filter<Data>,
+        filter?: Filter<any, any, any, any, any>,
         options?: UseDeleteOptions,
     ) => Promise<Pick<UseDeleteState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
 export type UseDeleteOptions = {
-    count?: null | Count
+    count?: Count
     returning?: Returning
 }
 
-export type UseDeleteConfig<Data = any> = {
-    filter?: Filter<Data>
+export type UseDeleteConfig = {
+    filter?: Filter<any, any, any, any, any>
     options?: UseDeleteOptions
 }
 
 export function useDelete<Data = any>(
     table: string,
-    config: UseDeleteConfig<Data> = { options: {} },
+    config: UseDeleteConfig = { options: {} },
 ): UseDeleteResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
@@ -39,14 +38,14 @@ export function useDelete<Data = any>(
 
     /* eslint-disable react-hooks/exhaustive-deps */
     const execute = useCallback(
-        async (filter?: Filter<Data>, options?: UseDeleteOptions) => {
+        async (filter?: Filter<any, any, any, any, any>, options?: UseDeleteOptions) => {
             const refine = filter ?? config.filter
             if (refine === undefined)
                 throw Error('delete() should always be combined with `filter`')
 
             setState({ ...initialState, fetching: true })
             const source = client
-                .from<Data>(table)
+                .from(table)
                 .delete(options ?? config.options)
             const { count, data, error } = await refine(source)
 

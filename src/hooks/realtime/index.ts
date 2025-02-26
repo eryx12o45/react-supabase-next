@@ -1,2 +1,2 @@
-export * from './use-subscription'
-export * from './use-realtime'
+export * from './use-subscription.ts'
+export * from './use-realtime.ts'

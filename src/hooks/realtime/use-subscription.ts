@@ -1,18 +1,14 @@
 import { useEffect } from 'react'
-import {
-    SupabaseEventTypes,
-    SupabaseRealtimePayload,
-} from '@supabase/supabase-js/dist/main/lib/types'
-
-import { useClient } from '../use-client'
+import { RealtimeMessage } from '@supabase/realtime-js'
+import { useClient } from '../use-client.js'
 
 export type UseSubscriptionConfig = {
-    event?: SupabaseEventTypes
+    event?: string
     table?: string
 }
 
-export function useSubscription<Data = any>(
-    callback: (payload: SupabaseRealtimePayload<Data>) => void,
+export function useSubscription(
+    callback: (payload: RealtimeMessage) => void,
     config: UseSubscriptionConfig = { event: '*', table: '*' },
 ) {
     const client = useClient()
@@ -20,8 +16,8 @@ export function useSubscription<Data = any>(
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         const subscription = client
-            .from<Data>(config.table ?? '*')
-            .on(config.event ?? '*', callback)
+            .channel(config.table ?? '*')
+            .on("system", config.event ?? '*', callback)
             .subscribe()
         return () => {
             subscription.unsubscribe()

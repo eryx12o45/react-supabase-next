@@ -1,12 +1,11 @@
-import { Provider, Session, User, UserCredentials } from '@supabase/gotrue-js'
-import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
+import { Provider, Session, User, AuthError, SignInWithPasswordCredentials } from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { useClient } from '../use-client.js'
+import { initialState } from './state.js'
 
 export type UseSignInState = {
-    error?: ApiError | null
+    error?: AuthError | null
     fetching: boolean
     session?: Session | null
     user?: User | null
@@ -15,7 +14,7 @@ export type UseSignInState = {
 export type UseSignInResponse = [
     UseSignInState,
     (
-        credentials: UserCredentials,
+        credentials: SignInWithPasswordCredentials,
         options?: UseSignInOptions,
     ) => Promise<Pick<UseSignInState, 'error' | 'session' | 'user'>>,
 ]
@@ -30,21 +29,19 @@ export type UseSignInConfig = {
     options?: UseSignInOptions
 }
 
-export function useSignIn(config: UseSignInConfig = {}): UseSignInResponse {
+export function useSignInWithPassword(config: UseSignInConfig = {}): UseSignInResponse {
     const client = useClient()
     const [state, setState] = useState<UseSignInState>(initialState)
 
     const execute = useCallback(
-        async (credentials: UserCredentials, options?: UseSignInOptions) => {
+        async (credentials: SignInWithPasswordCredentials) => {
             setState({ ...initialState, fetching: true })
-            const { error, session, user } = await client.auth.signIn(
+            const { data, error } = await client.auth.signInWithPassword(
                 {
-                    provider: config.provider,
-                    ...credentials,
-                },
-                options ?? config.options,
+                    ...credentials
+                }
             )
-            const res = { error, session, user }
+            const res = { data, error }
             setState({ ...res, fetching: false })
             return res
         },

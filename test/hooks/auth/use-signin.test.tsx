@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useSignIn } from '../../../src'
+import { useSignInWithPassword } from '../../../src/hooks/auth/use-signin.ts'
 
-describe('useSignIn', () => {
+describe('useSignInWithPassword', () => {
     it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSignIn())
+        const { result } = renderHook(() => useSignInWithPassword())
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 })

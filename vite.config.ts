@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
     build: {
@@ -15,6 +15,9 @@ export default defineConfig({
                 ...Object.keys(pkg.dependencies ?? {}),
                 ...Object.keys(pkg.devDependencies ?? {}),
             ],
+            output: {
+                esModule: true
+            }
         },
     },
     plugins: [
@@ -28,7 +31,7 @@ export default defineConfig({
                 emitDeclarationOnly: true,
                 noEmit: false,
             },
-            outputDir: 'dist/types',
+            outDir: 'dist/types',
         }),
     ],
 })

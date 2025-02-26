@@ -1,12 +1,12 @@
-import { Session, User, UserCredentials } from '@supabase/gotrue-js'
-import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
+import { Session, User, SignUpWithPasswordCredentials } from '@supabase/auth-js'
+import { AuthError } from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
-import { useClient } from '../use-client'
-import { initialState } from './state'
+import { useClient } from '../use-client.js'
+import { initialState } from './state.js'
 
 export type UseSignUpState = {
-    error?: ApiError | null
+    error?: AuthError | null
     fetching: boolean
     session?: Session | null
     user?: User | null
@@ -15,7 +15,7 @@ export type UseSignUpState = {
 export type UseSignUpResponse = [
     UseSignUpState,
     (
-        credentials: UserCredentials,
+        credentials: SignUpWithPasswordCredentials,
         options?: UseSignUpOptions,
     ) => Promise<Pick<UseSignUpState, 'error' | 'session' | 'user'>>,
 ]
@@ -33,13 +33,12 @@ export function useSignUp(config: UseSignUpConfig = {}): UseSignUpResponse {
     const [state, setState] = useState<UseSignUpState>(initialState)
 
     const execute = useCallback(
-        async (credentials: UserCredentials, options?: UseSignUpOptions) => {
+        async (credentials: SignUpWithPasswordCredentials) => {
             setState({ ...initialState, fetching: true })
-            const { error, session, user } = await client.auth.signUp(
-                credentials,
-                options ?? config.options,
+            const { data, error } = await client.auth.signUp(
+                credentials
             )
-            const res = { error, session, user }
+            const res = { data, error }
             setState({ ...res, fetching: false })
             return res
         },
