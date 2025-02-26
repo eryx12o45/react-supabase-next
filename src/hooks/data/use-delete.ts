@@ -45,7 +45,9 @@ export function useDelete<Data = any>(
         ) => {
             const refine = filter ?? config.filter
             if (refine === undefined)
-                throw new Error('delete() should always be combined with `filter`')
+                throw new Error(
+                    'delete() should always be combined with `filter`',
+                )
 
             setState({ ...initialState, fetching: true })
             const source = client.from(table).delete(options ?? config.options)
