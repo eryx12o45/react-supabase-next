@@ -3,8 +3,8 @@ import React, { useEffect, useReducer } from 'react'
 // @ts-expect-error
 import { SupabaseRealtimePayload } from '@supabase/supabase-js'
 
-import { UseSelectConfig, UseSelectState, useSelect } from '../data/index.js'
-import { useSubscription } from './use-subscription.js'
+import { UseSelectConfig, UseSelectState, useSelect } from '../data/index.ts'
+import { useSubscription } from './use-subscription.ts'
 
 export type UseRealtimeState<Data = any> = Omit<
     UseSelectState<Data>,

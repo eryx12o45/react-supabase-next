@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { RealtimeMessage } from '@supabase/realtime-js'
 
-import { useClient } from '../use-client.js'
+import { useClient } from '../use-client.ts'
 
 export type UseSubscriptionConfig = {
     event?: string

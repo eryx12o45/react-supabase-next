@@ -1,3 +1,3 @@
-export * from './context.js'
+export * from './context.ts'
 export * from './hooks/index.ts'
-export * from './types.js'
+export * from './types.ts'

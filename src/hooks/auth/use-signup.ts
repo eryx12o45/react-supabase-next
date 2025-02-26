@@ -6,8 +6,8 @@ import {
 } from '@supabase/auth-js'
 import { useCallback, useState } from 'react'
 
-import { useClient } from '../use-client.js'
-import { initialState } from './state.js'
+import { useClient } from '../use-client.ts'
+import { initialState } from './state.ts'
 
 export type UseSignUpState = {
     error?: AuthError | null
