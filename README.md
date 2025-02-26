@@ -1,6 +1,9 @@
+# This library is an updated for of https://github.com/tmm/react-supabase. This was solely created for testing purposes and is not functional equivalent nor is it intended to be used in production. If you feel like contributing to make it production ready, feel free to do so.
+
 ## Introduction
 
 `react-supabase-next` is a React Hooks library for [Supabase](https://supabase.io).
+
 
 <br/>
 
