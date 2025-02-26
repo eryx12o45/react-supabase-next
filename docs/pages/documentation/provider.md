@@ -4,7 +4,7 @@ In order to use a Supabase client, you need to provide it via the [Context API](
 
 ```tsx
 import { createClient } from '@supabase/supabase-js'
-import { Provider } from 'react-supabase'
+import { Provider } from 'react-supabase-next'
 
 const client = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
 

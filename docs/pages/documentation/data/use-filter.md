@@ -3,7 +3,7 @@
 Creates dynamic filter for using with other hooks.
 
 ```tsx highlight=4,5,6,7,8,9,10,11
-import { useFilter, useSelect } from 'react-supabase'
+import { useFilter, useSelect } from 'react-supabase-next'
 
 function Page() {
   const filter = useFilter(

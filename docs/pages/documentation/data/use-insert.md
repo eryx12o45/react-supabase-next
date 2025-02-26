@@ -3,7 +3,7 @@
 Performs INSERT into table.
 
 ```tsx highlight=4
-import { useInsert } from 'react-supabase'
+import { useInsert } from 'react-supabase-next'
 
 function Page() {
   const [{ count, data, error, fetching }, execute] = useInsert('todos')

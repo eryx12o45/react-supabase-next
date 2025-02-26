@@ -3,7 +3,7 @@
 Log in existing user, or login via a third-party provider.
 
 ```tsx highlight=4
-import { useSignInWithPassword } from 'react-supabase'
+import { useSignInWithPassword } from 'react-supabase-next'
 
 function Page() {
   const [{ error, fetching, session, user }, signIn] = useSignInWithPassword()

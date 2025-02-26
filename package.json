@@ -1,5 +1,5 @@
 {
-    "name": "react-supabase",
+    "name": "react-supabase-next",
     "version": "0.3.0",
     "description": "React Hooks library for Supabase",
     "type": "module",
@@ -12,8 +12,7 @@
         "require": "./dist/index.cjs.js"
     },
     "sideEffects": false,
-    "repository": "eryx12o45/react-supabase",
-    "homepage": "https://react-supabase.vercel.app",
+    "repository": "eryx12o45/react-supabase-next",
     "license": "MIT",
     "scripts": {
         "build": "vite build",

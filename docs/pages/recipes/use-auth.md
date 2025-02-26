@@ -4,7 +4,7 @@ Keep track of the authenticated session with the [Context API](https://reactjs.o
 
 ```tsx
 import { createContext, useEffect, useState } from 'react'
-import { useAuthStateChange, useClient } from 'react-supabase'
+import { useAuthStateChange, useClient } from 'react-supabase-next'
 
 const initialState = { session: null, user: null }
 export const AuthContext = createContext(initialState)

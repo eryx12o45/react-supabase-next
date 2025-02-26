@@ -3,7 +3,7 @@
 Receive a notification every time an auth event happens. Composed in the [`useAuth` recipe](/recipes/use-auth).
 
 ```tsx highlight=4,5,6
-import { useAuthStateChange } from 'react-supabase'
+import { useAuthStateChange } from 'react-supabase-next'
 
 function Page() {
   useAuthStateChange((event, session) => {

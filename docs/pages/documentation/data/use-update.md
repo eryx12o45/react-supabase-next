@@ -3,7 +3,7 @@
 Performs UPDATE on table.
 
 ```tsx highlight=4
-import { useUpdate } from 'react-supabase'
+import { useUpdate } from 'react-supabase-next'
 
 function Page() {
   const [{ count, data, error, fetching }, execute] = useUpdate('todos')

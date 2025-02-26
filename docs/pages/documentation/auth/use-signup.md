@@ -3,7 +3,7 @@
 Creates new user.
 
 ```tsx highlight=4
-import { useSignUp } from 'react-supabase'
+import { useSignUp } from 'react-supabase-next'
 
 function Page() {
   const [{ error, fetching, session, user }, signUp] = useSignUp()

@@ -3,9 +3,9 @@
 ## Installation
 
 ```
-yarn add react-supabase @supabase/supabase-js
+yarn add react-supabase-next @supabase/supabase-js
 # or
-npm install --save react-supabase @supabase/supabase-js
+npm install --save react-supabase-next @supabase/supabase-js
 ```
 
 ## Quick Start
@@ -14,7 +14,7 @@ Create a Supabase client and pass it to the `Provider`:
 
 ```tsx
 import { createClient } from '@supabase/supabase-js'
-import { Provider } from 'react-supabase'
+import { Provider } from 'react-supabase-next'
 
 const client = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
 
@@ -28,7 +28,7 @@ const App = () => (
 Now every component inside and under the `Provider` can use the Supabase client and hooks:
 
 ```tsx
-import { useRealtime } from 'react-supabase'
+import { useRealtime } from 'react-supabase-next'
 
 const Todos = () => {
   const [result, reexecute] = useRealtime('todos')

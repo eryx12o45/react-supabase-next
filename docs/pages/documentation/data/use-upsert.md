@@ -3,7 +3,7 @@
 Performs `INSERT` or `UPDATE` on table.
 
 ```tsx highlight=4
-import { useUpsert } from 'react-supabase'
+import { useUpsert } from 'react-supabase-next'
 
 function Page() {
   const [{ count, data, error, fetching }, execute] = useUpsert('users')

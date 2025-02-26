@@ -3,7 +3,7 @@
 Performs vertical filtering with SELECT.
 
 ```tsx highlight=4
-import { useSelect } from 'react-supabase'
+import { useSelect } from 'react-supabase-next'
 
 function Page() {
   const [{ count, data, error, fetching }, reexecute] = useSelect('todos')
@@ -40,7 +40,7 @@ The easiest way to avoid this is to create dynamic filters with the [`useFilter`
 
 ```tsx
 import { useState } from 'react'
-import { useFilter, useSelect } from 'react-supabase'
+import { useFilter, useSelect } from 'react-supabase-next'
 
 function Page() {
   const [status, setStatus] = useState('completed')
@@ -62,7 +62,7 @@ We can do this by setting the `pause` option to `true`:
 
 ```tsx
 import { useState } from 'react'
-import { useFilter, useSelect } from 'react-supabase'
+import { useFilter, useSelect } from 'react-supabase-next'
 
 function Page() {
   const [username, setUsername] = useState(null)

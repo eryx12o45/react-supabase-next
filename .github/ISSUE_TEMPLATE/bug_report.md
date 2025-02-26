@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a bug report for the `react-supabase` library
+about: Create a bug report for the `react-supabase-next` library
 ---
 
 # Bug report
@@ -19,5 +19,5 @@ Or share your code snippet or a [CodeSandbox](https://codesandbox.io) link is al
 
 ## Additional Context
 
-`react-supabase` version.
+`react-supabase-next` version.
 Add any other context about the problem here.

@@ -3,7 +3,7 @@
 Fetch table and listen for changes.
 
 ```tsx highlight=4
-import { useRealtime } from 'react-supabase'
+import { useRealtime } from 'react-supabase-next'
 
 function Page() {
   const [{ data, error, fetching }, reexecute] = useRealtime('todos')
@@ -19,7 +19,7 @@ You can pass a function for comparing subscription event changes. By default, th
 When using your own compare function, you typically want to compare unique values:
 
 ```tsx highlight=7
-import { useRealtime } from 'react-supabase'
+import { useRealtime } from 'react-supabase-next'
 
 function Page() {
   const [result, reexecute] = useRealtime(
@@ -39,7 +39,7 @@ When initializing the component you might need to filter your data appropriately
 First argument can be either a `string` table name or `useSelect` options with table property.
 
 ```tsx highlight=7,8,9,10
-import { useRealtime } from 'react-supabase'
+import { useRealtime } from 'react-supabase-next'
 
 function Page() {
   const [result, reexecute] = useRealtime(

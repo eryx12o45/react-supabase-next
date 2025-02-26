@@ -2,9 +2,9 @@
 title: Introduction
 ---
 
-# react-supabase
+# react-supabase-next
 
-`react-supabase` is a React Hooks library for [Supabase](https://supabase.io).
+`react-supabase-next` is a React Hooks library for [Supabase](https://supabase.io).
 
 ## Features
 
@@ -15,7 +15,7 @@ title: Introduction
 
 ## Community
 
-Feel free to join the [discussions on GitHub](https://github.com/tmm/react-supabase/discussions)!
+Feel free to join the [discussions on GitHub](https://github.com/eryx12o45/react-supabase-next/discussions)!
 
 # Thanks
-to https://github.com/tmm/react-supabase for building this library in the first place
+to https://github.com/eryx12o45/react-supabase-next for building this library in the first place

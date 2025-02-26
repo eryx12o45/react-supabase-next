@@ -3,7 +3,7 @@
 Performs DELETE on table.
 
 ```tsx highlight=4
-import { useDelete } from 'react-supabase'
+import { useDelete } from 'react-supabase-next'
 
 function Page() {
   const [{ count, data, error, fetching }, execute] = useDelete('todos')

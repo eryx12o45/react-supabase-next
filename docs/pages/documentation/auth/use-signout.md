@@ -3,7 +3,7 @@
 Remove logged in user and trigger a `SIGNED_OUT` event.
 
 ```tsx highlight=4
-import { useSignOut } from 'react-supabase'
+import { useSignOut } from 'react-supabase-next'
 
 function Page() {
   const [{ error, fetching }, signOut] = useSignOut()

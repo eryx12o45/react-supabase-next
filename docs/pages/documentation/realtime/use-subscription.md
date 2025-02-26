@@ -3,7 +3,7 @@
 Subscribe to database changes in realtime.
 
 ```tsx highlight=4,5,6
-import { useSubscription } from 'react-supabase'
+import { useSubscription } from 'react-supabase-next'
 
 function Page() {
   useSubscription((payload) => {

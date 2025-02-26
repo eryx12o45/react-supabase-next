@@ -3,7 +3,7 @@
 Sends reset request to email address.
 
 ```tsx highlight=4
-import { useResetPassword } from 'react-supabase'
+import { useResetPassword } from 'react-supabase-next'
 
 function Page() {
   const [{ error, fetching }, resetPassword] = useResetPassword()

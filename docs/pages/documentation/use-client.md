@@ -3,7 +3,7 @@
 Allows you to access the Supabase client directly, which is useful for use cases not covered by existing hooks or other customer behavoir.
 
 ```tsx highlight=4
-import { useClient } from 'react-supabase'
+import { useClient } from 'react-supabase-next'
 
 function Page() {
   const client = useClient()
