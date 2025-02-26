@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useRealtime } from '../../../src'
-import { Wrapper as wrapper } from '../../utils'
+import { useRealtime } from '../../../src/hooks/realtime/use-realtime.ts'
+import { Wrapper as wrapper } from '../../utils.tsx'
 
 describe('useRealtime', () => {
     it('should throw when not inside Provider', () => {

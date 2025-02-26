@@ -1,6 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useSignUp } from '../../../src'
+import { useSignUp } from '../../../src/hooks/auth/use-signup.ts'
 
 describe('useSignUp', () => {
     it('should throw when not inside Provider', () => {

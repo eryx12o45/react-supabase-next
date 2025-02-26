@@ -1,8 +1,8 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useDelete } from '../../../src'
-import { initialState } from '../../../src/hooks/data/state'
-import { Wrapper as wrapper } from '../../utils'
+import { useDelete } from '../../../src/hooks/data/use-delete.ts'
+import { initialState } from '../../../src/hooks/data/state.ts'
+import { Wrapper as wrapper } from '../../utils.tsx'
 
 describe('useDelete', () => {
     it('should throw when not inside Provider', () => {

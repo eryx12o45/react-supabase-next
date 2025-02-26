@@ -1,6 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useFilter } from '../../../src'
+import { useFilter } from '../../../src/hooks/data/use-filter.ts'
 
 describe('useFilter,', () => {
     it('should return filter', () => {

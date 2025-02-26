@@ -1,6 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useSubscription } from '../../../src'
+import { useSubscription } from '../../../src/hooks/realtime/use-subscription.ts'
 
 describe('useSubscription', () => {
     it('should throw when not inside Provider', () => {

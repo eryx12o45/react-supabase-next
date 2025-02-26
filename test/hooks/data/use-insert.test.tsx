@@ -1,8 +1,8 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useInsert } from '../../../src'
-import { initialState } from '../../../src/hooks/data/state'
-import { Wrapper as wrapper } from '../../utils'
+import { useInsert } from '../../../src/hooks/data/use-insert.ts'
+import { initialState } from '../../../src/hooks/data/state.ts'
+import { Wrapper as wrapper } from '../../utils.tsx'
 
 describe('useInsert', () => {
     it('should throw when not inside Provider', () => {

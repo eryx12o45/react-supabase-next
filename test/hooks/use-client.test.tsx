@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
-import { useClient } from '../../src'
-import { Wrapper as wrapper } from '../utils'
+import { useClient } from '../../src/hooks/use-client.ts'
+import { Wrapper as wrapper } from '../utils.tsx'
 
 describe('useClient', () => {
     it('should throw when not inside Provider', () => {

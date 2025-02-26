@@ -1,7 +1,7 @@
 import React from 'react'
 import { createClient } from '@supabase/supabase-js'
 
-import { Provider } from '../src'
+import { Provider } from '../src/context.ts'
 
 export const client = createClient('https://example.com', 'some.fake.key')
 
