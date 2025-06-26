@@ -1,6 +1,6 @@
 {
     "name": "react-supabase-next",
-    "version": "0.3.0",
+    "version": "0.3.2",
     "description": "React Hooks library for Supabase",
     "type": "module",
     "files": [
